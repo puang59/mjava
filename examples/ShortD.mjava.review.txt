@@ -1,0 +1,33 @@
+MANUAL REVIEW NEEDED: ShortD.mjava
+The generated Java did not compile within 3 retries.
+
+Remaining compiler errors (output file line numbers):
+  line 8: <identifier> expected
+
+--- block 0, ShortD.mjava lines 1-1: FAILED ---
+instruction: Bank account with balance double, deposit(double amt) adds amt to balance
+last attempt: #3 (sample)
+last generated code:
+  | class Bank {
+  |     private double balance;
+  |     private double deposit(double balance, double balance) {
+  |         this.balance = balance;
+  |         this.balance = balance;
+  |     }
+  | 
+  |     public void deposit(doubleterit) { balance += balance; }
+  | }
+  error at code line 8: <identifier> expected
+attempts: #0:generate:fail, #1:repair:fail, #2:repair:fail, #3:sample:fail
+
+--- last assembled Java ---
+class Bank {
+    private double balance;
+    private double deposit(double balance, double balance) {
+        this.balance = balance;
+        this.balance = balance;
+    }
+
+    public void deposit(doubleterit) { balance += balance; }
+}
+

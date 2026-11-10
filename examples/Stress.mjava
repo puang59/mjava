@@ -1,0 +1,17 @@
+// Stress test: combines several task families in one file.
+
+Define a simple class Vehicle with fields brand of type String, speed of type int.
+Also write a class SportsCar that extends Vehicle with the additional field int topSpeed (constructor uses super).
+It also has a method called boost that computes topSpeed * speed.
+
+Design an interface Describable that declares a method describe() returning String.
+Then add a class Gadget which implements Describable with fields name as String, price as double,
+where describe returns name and price joined by a colon.
+
+Design an abstract class called Shape with fields: a String label and an abstract method area() returning double.
+Also Circle extends Shape with field double radius; its area returns 3.14159 times radius times radius.
+Also Square extends Shape with field double side; its area returns side times side.
+
+Please create an enum Direction with constants NORTH, SOUTH, EAST, WEST.
+
+Define a simple class MathUtils containing static boolean isPrime(int n) - returns true if n is a prime number.

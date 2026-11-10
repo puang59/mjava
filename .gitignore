@@ -1,0 +1,36 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+*.class
+
+# generated data, checkpoints and run outputs
+data/
+checkpoints/
+runs/
+mjava/compiler/java/build/
+
+# keep the final trained model (~18 MB, needed by mjavac) and the results table/plots
+!checkpoints/
+checkpoints/*
+!checkpoints/best/
+!runs/
+runs/*
+!runs/compare.md
+!runs/plots/
+
+# too large for GitHub / old v1 artefacts (no Git LFS used)
+data_v1/
+checkpoints_v1/
+runs_v1/
+*.pt
+!checkpoints/best/model.pt
+*.zip
+
+# local tool output, logs, OS junk
+graphify-out/
+out/
+*.log
+.DS_Store
+mjava/compiler/java/build/

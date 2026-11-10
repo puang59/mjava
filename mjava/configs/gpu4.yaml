@@ -1,0 +1,56 @@
+# Config for a 4 GB CUDA card (RTX 3050 4GB class), bf16/fp16 autocast. UNTESTED on real hardware: the sizes below are an
+# estimate. Smaller than gpu.yaml (~27M parameters instead of ~44M) and with smaller batches.
+# If you hit CUDA OOM lower train.batch_tokens (6000 -> 4000 -> 3000) and train.max_batch_examples (64 -> 32);
+# for RL lower rl.batch_examples (8 -> 4) and rl.num_samples (2 -> 1).
+model:
+  d_model: 384
+  n_heads: 6
+  n_enc_layers: 6
+  n_dec_layers: 6
+  d_ff: 1536
+  dropout: 0.1
+  max_src_len: 448  # repair sources (instruction + error + broken code) reach ~380 tokens
+  max_tgt_len: 384
+train:
+  lr: 4.0e-4
+  weight_decay: 0.01
+  warmup_steps: 1000
+  max_steps: 40000
+  batch_tokens: 6000
+  max_batch_examples: 64
+  label_smoothing: 0.1
+  grad_clip: 1.0
+  eval_every: 1000
+  log_every: 50
+  val_examples: 1000
+  repair_fraction: 0.3
+  amp: true
+  seed: 0
+rl:  # RL fine-tuning (python -m mjava.train.rl); keys and defaults as in mjava/train/rl.py RL_DEFAULTS. Unknown keys raise.
+  lr: 1.0e-5
+  weight_decay: 0.0
+  warmup_steps: 50
+  max_steps: 1500  # normally cut by --max-minutes (schedule follows wall clock)
+  lambda_rl: 0.5  # weight of the RL term; (1 - lambda_rl) is cross-entropy on the same batch
+  num_samples: 2  # sampled sequences per source (lower on CUDA OOM)
+  temperature: 0.8
+  top_k: 40
+  batch_examples: 8  # sources per RL batch (lower on CUDA OOM)
+  batch_tokens: 6000  # padded reference tokens per batch cap (lower on CUDA OOM)
+  repair_fraction: 0.3
+  grad_clip: 1.0
+  mle_label_smoothing: 0.0
+  eval_every: 100
+  log_every: 10
+  val_gen: 300  # fixed validation subset: first N generate examples of val
+  val_fix: 100  # ... and first M repair examples
+  val_batch: 16
+  max_train_examples: null
+  amp: true  # CUDA only
+  seed: 0
+  compile_cache: 8192
+  max_chars: 20000
+  fail_scale: 0.3  # reward for non-compiling code = fail_scale * conformance * max(0, 1 - error_penalty * n_errors)
+  error_penalty: 0.2
+  no_spec_conf: 0.5  # conformance used when an example has no spec
+  max_oom_skips: 20  # abort after this many skipped out-of-memory batches

@@ -1,0 +1,15 @@
+package demo;
+
+/* Shapes: the next block spans two lines and is one instruction. */
+Create a class Rectangle with fields: width as double,
+height as double and a method area that returns width times height.
+
+// plain Java is passed through untouched
+class Util {
+
+    static int twice(int x) {
+        return 2 * x;
+    }
+}
+
+Write a static method isEven(int n) that returns true when n is even.

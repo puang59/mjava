@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mjava"
+version = "0.1.0"
+description = "Self-correcting Java code generation using Transformers and RL"
+requires-python = ">=3.11"
+dependencies = [
+    "torch",
+    "tokenizers",
+    "numpy",
+    "pyyaml",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "datasets", "matplotlib"]
+
+[project.scripts]
+mjavac = "mjava.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mjava*"]
+
+[tool.setuptools.package-data]
+mjava = ["compiler/java/*.java", "configs/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "javac: needs a working JDK on PATH",
+    "slow: takes more than a few seconds",
+]

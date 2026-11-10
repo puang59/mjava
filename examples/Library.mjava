@@ -1,0 +1,13 @@
+// Mixes hand-written Java with shorthand blocks.
+import java.util.List;
+
+Create a class Book with fields: title as String, pages as int.
+
+class Main {
+    public static void main(String[] args) {
+        Book b = new Book();
+        System.out.println("hello");
+    }
+}
+
+@gen an enum Color with constants RED, GREEN and BLUE.

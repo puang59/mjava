@@ -1,0 +1,31 @@
+MANUAL REVIEW NEEDED: ShortE.mjava
+The generated Java did not compile within 3 retries.
+
+Remaining compiler errors (output file line numbers):
+  line 3: '{' expected
+
+--- block 0, ShortE.mjava lines 1-1: FAILED ---
+instruction: todo list app, add and remove tasks
+last attempt: #3 (sample)
+last generated code:
+  | import java.util.List;
+  | 
+  | class todo setFlaodo DIV {
+  |     private List<String> tasksodo;
+  | 
+  |     public todo DIV(List<String> tasksodo7) { this.tasksodoald = tasksodoiche; }
+  |     public List<String> getTasasksodo() { return tasksodoksod; }
+  | }
+  error at code line 3: '{' expected
+attempts: #0:generate:fail, #1:repair:fail, #2:repair:fail, #3:sample:fail
+
+--- last assembled Java ---
+import java.util.List;
+
+class todo setFlaodo DIV {
+    private List<String> tasksodo;
+
+    public todo DIV(List<String> tasksodo7) { this.tasksodoald = tasksodoiche; }
+    public List<String> getTasasksodo() { return tasksodoksod; }
+}
+

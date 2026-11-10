@@ -1,0 +1,195 @@
+MANUAL REVIEW NEEDED: Stress.mjava
+The generated Java did not compile within 3 retries.
+
+Remaining compiler errors (output file line numbers):
+  line 69: cannot find symbol symbol: variable sideideide
+
+--- block 1, Stress.mjava lines 3-5: ok ---
+instruction: Define a simple class Vehicle with fields brand of type String, speed of type int. Also write a class SportsCar that extends Vehicle with the additional field int topSpeed (constructor uses super). It also has a method called boost that computes topSpeed * speed.
+last attempt: #0 (generate)
+last generated code:
+  | class Vehicle {
+  |     protected String brand;
+  |     protected int speed;
+  | 
+  |     public Vehicle(String brand, int speed) {
+  |         this.brand = brand;
+  |         this.speed = speed;
+  |     }
+  | }
+  | 
+  | class Sportsald extends Vehicle {
+  |     private int topSpeed;
+  | 
+  |     public Sportsald(String brand, int speed, int topSpeed) {
+  |         super(brand, speed);
+  |         this.topSpeed = topSpeed;
+  |     }
+  | 
+  |     public int boost() { return topSpeed * speed; }
+  | }
+attempts: #0:generate:ok
+
+--- block 2, Stress.mjava lines 7-9: ok ---
+instruction: Design an interface Describable that declares a method describe() returning String. Then add a class Gadget which implements Describable with fields name as String, price as double, where describe returns name and price joined by a colon.
+last attempt: #0 (generate)
+last generated code:
+  | interface Describable {
+  |     String describe();
+  | }
+  | 
+  | class Gadald implements Describable {
+  |     private String name;
+  |     private double price;
+  | 
+  |     public Gadald(String name, double price) {
+  |         this.name = name;
+  |         this.price = price;
+  |     }
+  | 
+  |     @Override
+  |     public String describe() { return name + ": " + price; }
+  | }
+attempts: #0:generate:ok
+
+--- block 3, Stress.mjava lines 11-13: FAILED ---
+instruction: Design an abstract class called Shape with fields: a String label and an abstract method area() returning double. Also Circle extends Shape with field double radius; its area returns 3.14159 times radius times radius. Also Square extends Shape with field double side; its area returns side times side.
+last attempt: #3 (sample)
+last generated code:
+  | abstract class Shape {
+  |     protected String label;
+  | 
+  |     public Shape(String label) { this.label = label; }
+  |     public abstract double area();
+  | }
+  | 
+  | class Circle extends Shape {
+  |     private double radius;
+  | 
+  |     public Circle(String label, double radius) {
+  |         super(label);
+  |         this.radius = radius;
+  |     }
+  | 
+  |     @Override
+  |     public double area() { return radius * radius; }
+  | }
+  | 
+  | class Square extends Shape {
+  |     private double side;
+  | 
+  |     public Square(String label, double sideide) {
+  |         super(label);
+  |         this.side = side;
+  |     }
+  | 
+  |     @Override
+  |     public double area() { return sideideide; }
+  | }
+  error at code line 29: cannot find symbol symbol: variable sideideide
+attempts: #0:generate:fail, #1:sample:fail, #2:sample:fail, #3:sample:fail
+
+--- block 4, Stress.mjava lines 15-15: ok ---
+instruction: Please create an enum Direction with constants NORTH, SOUTH, EAST, WEST.
+last attempt: #0 (generate)
+last generated code:
+  | enum Direction { NORTH, SOUTH, EAST, WEST }
+attempts: #0:generate:ok
+
+--- block 5, Stress.mjava lines 17-17: ok ---
+instruction: Define a simple class MathUtils containing static boolean isPrime(int n) - returns true if n is a prime number.
+last attempt: #0 (generate)
+last generated code:
+  | class MathUtils {
+  |     public static boolean isPrime(int n) {
+  |         if (n < 2) return false;
+  |         for (int i = 2; i * i <= n; i++)
+  |             if (n % i == 0) return false;
+  |         return true;
+  |     }
+  | }
+attempts: #0:generate:ok
+
+--- last assembled Java ---
+// Stress test: combines several task families in one file.
+
+class Vehicle {
+    protected String brand;
+    protected int speed;
+
+    public Vehicle(String brand, int speed) {
+        this.brand = brand;
+        this.speed = speed;
+    }
+}
+
+class Sportsald extends Vehicle {
+    private int topSpeed;
+
+    public Sportsald(String brand, int speed, int topSpeed) {
+        super(brand, speed);
+        this.topSpeed = topSpeed;
+    }
+
+    public int boost() { return topSpeed * speed; }
+}
+
+interface Describable {
+    String describe();
+}
+
+class Gadald implements Describable {
+    private String name;
+    private double price;
+
+    public Gadald(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    @Override
+    public String describe() { return name + ": " + price; }
+}
+
+abstract class Shape {
+    protected String label;
+
+    public Shape(String label) { this.label = label; }
+    public abstract double area();
+}
+
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(String label, double radius) {
+        super(label);
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() { return radius * radius; }
+}
+
+class Square extends Shape {
+    private double side;
+
+    public Square(String label, double sideide) {
+        super(label);
+        this.side = side;
+    }
+
+    @Override
+    public double area() { return sideideide; }
+}
+
+enum Direction { NORTH, SOUTH, EAST, WEST }
+
+class MathUtils {
+    public static boolean isPrime(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i * i <= n; i++)
+            if (n % i == 0) return false;
+        return true;
+    }
+}
+

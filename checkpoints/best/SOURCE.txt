@@ -1,0 +1,2 @@
+copied from /Users/puang/Desktop/mjava/mjava-project/checkpoints/cpu_rl (supervised+RL) by scripts/run_all.py on 2026-10-13 16:59:13
+test final compile+conform 0.7317, first-attempt compile+conform 0.7200

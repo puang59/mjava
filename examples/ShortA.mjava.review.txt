@@ -1,0 +1,33 @@
+MANUAL REVIEW NEEDED: ShortA.mjava
+The generated Java did not compile within 3 retries.
+
+Remaining compiler errors (output file line numbers):
+  line 5: not a statement
+  line 5: ';' expected
+
+--- block 0, ShortA.mjava lines 1-1: FAILED ---
+instruction: make a class Point with x and y as int
+last attempt: #3 (sample)
+last generated code:
+  | class Point {
+  |     private int x;
+  | 
+  |     public Point(int x, int y) {
+  |         this.z x = x;
+  |         this. y = x;
+  |     }
+  | }
+  error at code line 5: not a statement
+  error at code line 5: ';' expected
+attempts: #0:generate:fail, #1:repair:fail, #2:sample:fail, #3:sample:fail
+
+--- last assembled Java ---
+class Point {
+    private int x;
+
+    public Point(int x, int y) {
+        this.z x = x;
+        this. y = x;
+    }
+}
+

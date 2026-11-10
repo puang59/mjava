@@ -1,0 +1,52 @@
+# Small fallback for CPU-only machines (not tuned/measured; real training is intended for the gpu config).
+model:
+  d_model: 192
+  n_heads: 4
+  n_enc_layers: 3
+  n_dec_layers: 3
+  d_ff: 768
+  dropout: 0.1
+  max_src_len: 448
+  max_tgt_len: 384
+train:
+  lr: 1.0e-3
+  weight_decay: 0.01
+  warmup_steps: 300
+  max_steps: 100000      # normally cut by --max-minutes (schedule follows wall clock)
+  batch_tokens: 4000     # padded target tokens per batch
+  max_batch_examples: 64
+  label_smoothing: 0.1
+  grad_clip: 1.0
+  eval_every: 500
+  log_every: 20
+  val_examples: 500
+  repair_fraction: 0.3
+  seed: 0
+rl:  # RL fine-tuning, small values for a CPU fallback (untuned)
+  lr: 1.0e-5
+  weight_decay: 0.0
+  warmup_steps: 50
+  max_steps: 300  # normally cut by --max-minutes (schedule follows wall clock)
+  lambda_rl: 0.5  # weight of the RL term; (1 - lambda_rl) is cross-entropy on the same batch
+  num_samples: 2  # sampled sequences per source (lower on CUDA OOM)
+  temperature: 0.8
+  top_k: 40
+  batch_examples: 8  # sources per RL batch (lower on CUDA OOM)
+  batch_tokens: 4000  # padded reference tokens per batch cap (lower on CUDA OOM)
+  repair_fraction: 0.3
+  grad_clip: 1.0
+  mle_label_smoothing: 0.0
+  eval_every: 50
+  log_every: 10
+  val_gen: 100  # fixed validation subset: first N generate examples of val
+  val_fix: 40  # ... and first M repair examples
+  val_batch: 32
+  max_train_examples: null
+  amp: false  # CUDA only
+  seed: 0
+  compile_cache: 8192
+  max_chars: 20000
+  fail_scale: 0.3  # reward for non-compiling code = fail_scale * conformance * max(0, 1 - error_penalty * n_errors)
+  error_penalty: 0.2
+  no_spec_conf: 0.5  # conformance used when an example has no spec
+  max_oom_skips: 20  # abort after this many skipped out-of-memory batches

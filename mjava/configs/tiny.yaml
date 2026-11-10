@@ -1,0 +1,52 @@
+# Unit tests / smoke runs. vocab_size and special ids are filled in from the tokenizer.
+model:
+  d_model: 64
+  n_heads: 4
+  n_enc_layers: 2
+  n_dec_layers: 2
+  d_ff: 256
+  dropout: 0.0
+  max_src_len: 128
+  max_tgt_len: 256
+train:
+  lr: 3.0e-3
+  weight_decay: 0.0
+  warmup_steps: 20
+  max_steps: 600
+  batch_tokens: 8000
+  max_batch_examples: 32
+  label_smoothing: 0.0
+  grad_clip: 1.0
+  eval_every: 100
+  log_every: 20
+  val_examples: 64
+  repair_fraction: 0.3
+  seed: 0
+rl:  # RL smoke/test settings
+  lr: 1.0e-4
+  weight_decay: 0.0
+  warmup_steps: 2
+  max_steps: 40  # normally cut by --max-minutes (schedule follows wall clock)
+  lambda_rl: 0.5  # weight of the RL term; (1 - lambda_rl) is cross-entropy on the same batch
+  num_samples: 2  # sampled sequences per source (lower on CUDA OOM)
+  temperature: 0.8
+  top_k: 40
+  batch_examples: 8  # sources per RL batch (lower on CUDA OOM)
+  batch_tokens: 4000  # padded reference tokens per batch cap (lower on CUDA OOM)
+  repair_fraction: 0.3
+  grad_clip: 1.0
+  mle_label_smoothing: 0.0
+  eval_every: 20
+  log_every: 5
+  val_gen: 16  # fixed validation subset: first N generate examples of val
+  val_fix: 8  # ... and first M repair examples
+  val_batch: 16
+  max_train_examples: null
+  amp: false  # CUDA only
+  seed: 0
+  compile_cache: 8192
+  max_chars: 20000
+  fail_scale: 0.3  # reward for non-compiling code = fail_scale * conformance * max(0, 1 - error_penalty * n_errors)
+  error_penalty: 0.2
+  no_spec_conf: 0.5  # conformance used when an example has no spec
+  max_oom_skips: 20  # abort after this many skipped out-of-memory batches

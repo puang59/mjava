@@ -1,0 +1,5 @@
+// Custom syntax a user would actually write --
+// natural language instructions, not new syntax rules
+
+Create a class Student with fields: name as String,
+  age as int, gpa as double with a method to display the name called displayName.

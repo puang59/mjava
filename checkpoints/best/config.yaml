@@ -1,0 +1,46 @@
+model:
+  vocab_size: 6000
+  d_model: 192
+  n_heads: 4
+  n_enc_layers: 3
+  n_dec_layers: 3
+  d_ff: 768
+  dropout: 0.1
+  max_src_len: 448
+  max_tgt_len: 384
+  pad_id: 0
+  bos_id: 1
+  eos_id: 2
+stage: rl
+rl:
+  lr: 1.0e-05
+  weight_decay: 0.0
+  warmup_steps: 50
+  max_steps: 300
+  lambda_rl: 0.5
+  num_samples: 2
+  temperature: 0.8
+  top_k: 40
+  batch_examples: 8
+  batch_tokens: 4000
+  repair_fraction: 0.3
+  grad_clip: 1.0
+  mle_label_smoothing: 0.0
+  eval_every: 50
+  log_every: 10
+  val_gen: 100
+  val_fix: 40
+  val_batch: 32
+  max_train_examples: null
+  amp: false
+  seed: 0
+  compile_cache: 8192
+  max_chars: 20000
+  fail_scale: 0.3
+  error_penalty: 0.2
+  no_spec_conf: 0.5
+  max_oom_skips: 20
+step: 200
+val_full_rate: 0.9071428571428571
+val_compile_rate: 0.9428571428571428
+val_mean_conformance: 0.9860430839002269
